@@ -1,0 +1,2 @@
+module QuadraHelper
+end

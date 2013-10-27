@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+
+  <title>Onde Jogar Squash</title>
+
+  <!-- Google Places Autocomplete -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBjCmHNmgYtzjImhQRDdD8uC5eDK9Uedhc&sensor=false&libraries=places"></script>
+
+
+</head>
+
+<%= yield %>
+
+</html>

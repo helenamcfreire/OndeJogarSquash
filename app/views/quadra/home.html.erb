@@ -1,0 +1,55 @@
+<!-- Google Places Autocomplete -->
+<script>
+
+    var autocomplete;
+
+    function initialize() {
+        autocomplete = new google.maps.places.Autocomplete(
+                (document.getElementById('searchTextField')),
+                { types: ['(cities)'] });
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+            var place = autocomplete.getPlace();
+
+            $.ajax({
+                url: '/quadra/list?cidade=' + place.id,
+                dataType: 'json',
+                success: function (json) {
+
+                    $('tbody').empty();
+
+                    $.each(json, function () {
+
+                        $('tbody')
+                                .append($('<tr>')
+                                        .append($('<td>').text(this['nome']))
+                                        .append($('<td>').text(this['endereco']))
+                                );
+                    });
+                }
+            });
+        });
+    }
+
+</script>
+
+<body onload="initialize()">
+
+<div class="container">
+
+  <input type="text" id="searchTextField" class="form-control" placeholder="Aonde você quer jogar?" autofocus>
+
+  <table class="table table-striped">
+    <thead>
+        <tr>
+          <th>Quadra</th>
+          <th>Endereço</th>
+        </tr>
+    </thead>
+        <tbody>
+        </tbody>
+  </table>
+
+</div> <!-- /container -->
+
+</body>

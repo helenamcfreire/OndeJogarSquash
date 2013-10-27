@@ -1,0 +1,37 @@
+<!-- Google Places Autocomplete -->
+<script>
+
+    var autocomplete;
+
+    function initialize() {
+        autocomplete = new google.maps.places.Autocomplete(
+                (document.getElementById('searchTextField')),
+                { types: ['(cities)'] });
+
+        google.maps.event.addListener(autocomplete, 'place_changed', function() {
+            var place = autocomplete.getPlace();
+
+            document.getElementById('cidadeId').value = place.id;
+
+        });
+    }
+
+</script>
+
+<body onload="initialize()">
+
+<%= form_for @quadra, :url => {:action => 'create'} do |r| %>
+
+    Nome: <%= r.text_field :nome %><br/>
+    Endereço: <%= r.text_field :endereco %><br/>
+
+    <input type="text" id="searchTextField" style="width: 500px">
+
+    <%= r.hidden_field :cidade_id, :id => 'cidadeId' %>
+
+    <%= r.submit 'Cadastrar' %>
+
+
+<% end %>
+
+</body>
